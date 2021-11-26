@@ -4,7 +4,7 @@ variable "cloud" {
 
   validation {
     condition     = contains(["aws", "azure"], lower(var.cloud)) #Only AWS+Azure support for now
-    error_message = "Invalid cloud type. Choose AWS or Azure"
+    error_message = "Invalid cloud type. Choose AWS or Azure."
   }
 }
 
@@ -20,7 +20,7 @@ variable "firewall_vendor" {
 
   validation {
     condition     = contains(["fortigate", "checkpoint", "paloalto"], lower(var.firewall_vendor))
-    error_message = "Invalid cloud type. Choose Checkpoint, Fortigate or PaloAlto"
+    error_message = "Invalid vendor. Choose Checkpoint, Fortigate or PaloAlto."
   }
 }
 
