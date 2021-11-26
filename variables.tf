@@ -24,6 +24,13 @@ variable "firewall_vendor" {
   }
 }
 
+variable "region" {
+  type        = string
+  description = "Region in which to create the storage account."
+  default     = null
+}
+
+
 locals {
   cloud           = lower(var.cloud)
   firewall_vendor = lower(var.firewall_vendor)
@@ -37,7 +44,7 @@ locals {
   user_data_vendor_aws = lookup(local.user_data_vendor_aws_map, local.firewall_vendor, "")
   user_data_vendor_aws_map = {
     checkpoint = local.firewall_vendor == "checkpoint" && local.cloud == "aws" ? module.aws_checkpoint[0].user_data : null,
-    fortigate  = local.firewall_vendor == "fortigate"  && local.cloud == "aws" ? module.aws_fortigate[0].user_data : null,
+    fortigate  = local.firewall_vendor == "fortigate" && local.cloud == "aws" ? module.aws_fortigate[0].user_data : null,
   }
 
   user_data_vendor_azure = lookup(local.user_data_vendor_azure_map, local.firewall_vendor, "")

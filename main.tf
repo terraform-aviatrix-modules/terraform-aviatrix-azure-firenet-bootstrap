@@ -7,7 +7,7 @@ module "azure_paloalto" {
   count  = local.cloud == "azure" ? (local.firewall_vendor == "paloalto" ? 1 : 0) : 0
   source = "./modules/azure_paloalto"
 
-  region = ""
+  region = var.region
 }
 
 module "aws_checkpoint" {
