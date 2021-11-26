@@ -72,7 +72,7 @@ resource "aws_iam_role" "bootstrap" {
 EOF
 }
 data "template_file" "iam_policy" {
-  template = file("iam_policy.tpl")
+  template = file("${path.module}/iam_policy.tpl")
   vars = {
     ARN = aws_s3_bucket.bootstrap.arn
   }
