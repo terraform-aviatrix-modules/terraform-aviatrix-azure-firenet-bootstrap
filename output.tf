@@ -3,21 +3,21 @@ output "user_data" {
 }
 
 output "bootstrap_storage_name" {
-  value = "x"
+  value = local.bootstrap_storage_name
 }
 
 output "storage_access_key" {
-  value = "x"
+  value = local.storage_access_key
 }
 
 output "file_share_folder" {
-  value = "x"
+  value = local.file_share_folder
 }
 
 output "iam_role" {
-  value = "x"
+  value = local.iam_role
 }
 
 output "bootstrap_bucket_name" {
-  value = "x"
+  value = local.bootstrap_bucket_name
 }

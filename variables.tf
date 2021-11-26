@@ -30,7 +30,6 @@ variable "region" {
   default     = null
 }
 
-
 locals {
   cloud           = lower(var.cloud)
   firewall_vendor = lower(var.firewall_vendor)
@@ -52,5 +51,11 @@ locals {
     checkpoint = local.firewall_vendor == "checkpoint" && local.cloud == "azure" ? module.azure_checkpoint[0].user_data : null,
     fortigate  = local.firewall_vendor == "fortigate" && local.cloud == "azure" ? module.azure_fortigate[0].user_data : null,
   }
+
+  bootstrap_storage_name = local.firewall_vendor == "paloalto" && local.cloud == "azure" ? module.azure_paloalto[0].bootstrap_storage_name : null
+  storage_access_key     = local.firewall_vendor == "paloalto" && local.cloud == "azure" ? module.azure_paloalto[0].storage_access_key : null
+  file_share_folder      = local.firewall_vendor == "paloalto" && local.cloud == "azure" ? module.azure_paloalto[0].file_share_folder : null
+  iam_role               = local.firewall_vendor == "paloalto" && local.cloud == "aws" ? module.aws_paloalto[0].iam_role : null
+  bootstrap_bucket_name  = local.firewall_vendor == "paloalto" && local.cloud == "aws" ? module.aws_paloalto[0].bootstrap_bucket_name : null
 }
 
