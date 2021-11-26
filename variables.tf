@@ -36,14 +36,14 @@ locals {
 
   user_data_vendor_aws = lookup(local.user_data_vendor_aws_map, local.firewall_vendor, "")
   user_data_vendor_aws_map = {
-    checkpoint = local.firewall_vendor == "checkpoint" ? aws_checkpoint[0].user_data : null,
-    fortigate  = local.firewall_vendor == "fortigate" ? aws_fortigate[0].user_data : null,
+    checkpoint = local.firewall_vendor == "checkpoint" ? module.aws_checkpoint[0].user_data : null,
+    fortigate  = local.firewall_vendor == "fortigate" ? module.aws_fortigate[0].user_data : null,
   }
 
   user_data_vendor_azure = lookup(local.user_data_vendor_azure_map, local.firewall_vendor, "")
   user_data_vendor_azure_map = {
-    checkpoint = local.firewall_vendor == "checkpoint" ? azure_checkpoint[0].user_data : null,
-    fortigate  = local.firewall_vendor == "fortigate" ? azure_fortigate[0].user_data : null,
+    checkpoint = local.firewall_vendor == "checkpoint" ? module.azure_checkpoint[0].user_data : null,
+    fortigate  = local.firewall_vendor == "fortigate" ? module.azure_fortigate[0].user_data : null,
   }
 }
 
