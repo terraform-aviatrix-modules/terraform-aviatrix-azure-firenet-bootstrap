@@ -7,7 +7,7 @@
                 "s3:Get*",
                 "s3:List*"
             ],
-            "Resource": [${ARN}]
+            "Resource": ["${ARN}"]
         }
     ]
 }
