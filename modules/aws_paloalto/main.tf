@@ -84,7 +84,7 @@ resource "aws_iam_policy" "bootstrap" {
                 "s3:Get*",
                 "s3:List*"
             ],
-            "Resource": [${aws_s3_bucket.arn}]
+            "Resource": [${aws_s3_bucket.bootstrap.arn}]
         }
     ]
 }
