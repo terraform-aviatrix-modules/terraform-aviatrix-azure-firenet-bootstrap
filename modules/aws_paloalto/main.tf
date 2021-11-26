@@ -73,7 +73,7 @@ EOF
 }
 
 resource "aws_iam_policy" "bootstrap" {
-  name   = "bootstrap"
+  name   = "bootstrap-${random_string.bucket.result}"
   policy = <<EOF
 {
     "Version": "2012-10-17",
