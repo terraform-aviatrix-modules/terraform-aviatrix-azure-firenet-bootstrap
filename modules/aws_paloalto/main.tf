@@ -71,22 +71,14 @@ resource "aws_iam_role" "bootstrap" {
 }
 EOF
 }
+data "template_file" "iam_policy" {
+  template = file("iam_policy.tpl")
+  vars = {
+    ARN = aws_s3_bucket.bootstrap.arn
+  }
+}
 
 resource "aws_iam_policy" "bootstrap" {
   name   = "bootstrap-${random_string.bucket.result}"
-  policy = <<EOF
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:Get*",
-                "s3:List*"
-            ],
-            "Resource": [${aws_s3_bucket.bootstrap.arn}]
-        }
-    ]
-}
-EOF
+  policy = data.template_file.iam_policy.rendered
 }
