@@ -54,7 +54,7 @@ resource "aws_s3_bucket_object" "init" {
 
 #Create IAM role and policy for the FW instance to access the bucket.
 resource "aws_iam_role" "bootstrap" {
-  name               = "bootstrap"
+  name               = "bootstrap-${random_string.bucket.result}"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
