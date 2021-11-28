@@ -53,35 +53,38 @@ resource "aws_s3_bucket_object" "init" {
 }
 
 #Create IAM role and policy for the FW instance to access the bucket.
-resource "aws_iam_role" "bootstrap" {
-  name               = "bootstrap-${random_string.bucket.result}"
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "ec2.amazonaws.com"
-      },
-      "Effect": "Allow",
-      "Sid": ""
+data "aws_iam_policy_document" "bootstrap_role" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["ec2.amazonaws.com"]
     }
-  ]
-}
-EOF
+  }
 }
 
-data "template_file" "iam_policy" {
-  template = file("${path.module}/iam_policy.tpl")
-  vars = {
-    ARN = aws_s3_bucket.bootstrap.arn
+resource "aws_iam_role" "bootstrap" {
+  name               = "bootstrap-${random_string.bucket.result}"
+  assume_role_policy = data.aws_iam_policy_document.bootstrap_role.json
+}
+
+data "aws_iam_policy_document" "bootstrap_policy" {
+  statement {
+    actions = [
+      "s3:List*",
+      "s3:Get*",
+    ]
+
+    resources = [
+      "${aws_s3_bucket.bootstrap.arn}",
+    ]
   }
 }
 
 resource "aws_iam_policy" "bootstrap" {
   name   = "bootstrap-${random_string.bucket.result}"
-  policy = data.template_file.iam_policy.rendered
+  policy = data.aws_iam_policy_document.bootstrap_policy.json
 }
 
 resource "aws_iam_role_policy_attachment" "policy_role" {
@@ -90,6 +93,6 @@ resource "aws_iam_role_policy_attachment" "policy_role" {
 }
 
 resource "aws_iam_instance_profile" "instance_role" {
-  name = "bootstrap-${random_string.bucket.result}"
+  name = "bootstrap-${random_string.bucket.result}" #Needs to match the iam_role_name for the Aviatrix controller to pick it up.
   role = aws_iam_role.bootstrap.name
 }
