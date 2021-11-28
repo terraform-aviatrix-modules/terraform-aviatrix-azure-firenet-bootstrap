@@ -43,13 +43,13 @@ resource "aws_s3_bucket_object" "folder_software" {
 resource "aws_s3_bucket_object" "xml" {
   bucket = aws_s3_bucket.bootstrap.id
   key    = "config/bootstrap.xml"
-  source = "bootstrap.xml"
+  source = "${path.module}/bootstrap.xml"
 }
 
 resource "aws_s3_bucket_object" "init" {
   bucket = aws_s3_bucket.bootstrap.id
   key    = "config/init-cfg.txt"
-  source = "init-cfg.txt"
+  source = "${path.module}/init-cfg.txt"
 }
 
 #Create IAM role and policy for the FW instance to access the bucket.
