@@ -82,3 +82,13 @@ resource "aws_iam_policy" "bootstrap" {
   name   = "bootstrap-${random_string.bucket.result}"
   policy = data.template_file.iam_policy.rendered
 }
+
+resource "aws_iam_role_policy_attachment" "policy_role" {
+  role       = aws_iam_role.bootstrap.name
+  policy_arn = aws_iam_policy.bootstrap.arn
+}
+
+resource "aws_iam_instance_profile" "instance_role" {
+  name = "bootstrap"
+  role = aws_iam_role.bootstrap.name
+}
