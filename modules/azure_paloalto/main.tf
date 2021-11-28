@@ -51,12 +51,12 @@ resource "azurerm_storage_share_file" "xml" {
   name             = "bootstrap.xml"
   path             = "config"
   storage_share_id = azurerm_storage_share.bootstrap.id
-  source           = "bootstrap-azure.xml"
+  source           = "${path.module}/bootstrap-azure.xml"
 }
 
 resource "azurerm_storage_share_file" "cfg" {
   name             = "init-cfg.txt"
   path             = "config"
   storage_share_id = azurerm_storage_share.bootstrap.id
-  source           = "init-cfg.txt"
+  source           = "${path.module}/init-cfg.txt"
 }
