@@ -11,7 +11,7 @@ resource "azurerm_resource_group" "bootstrap" {
 }
 
 resource "azurerm_storage_account" "bootstrap" {
-  name                     = "bootstrappanw-${random_string.account.result}"
+  name                     = "bootstrappanw${random_string.account.result}"
   resource_group_name      = azurerm_resource_group.bootstrap.name
   location                 = var.region
   account_tier             = "Standard"
