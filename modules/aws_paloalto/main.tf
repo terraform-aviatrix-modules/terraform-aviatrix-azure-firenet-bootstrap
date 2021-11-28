@@ -71,6 +71,7 @@ resource "aws_iam_role" "bootstrap" {
 }
 EOF
 }
+
 data "template_file" "iam_policy" {
   template = file("${path.module}/iam_policy.tpl")
   vars = {
@@ -89,6 +90,6 @@ resource "aws_iam_role_policy_attachment" "policy_role" {
 }
 
 resource "aws_iam_instance_profile" "instance_role" {
-  name = "bootstrap"
+  name = "bootstrap-${random_string.bucket.result}"
   role = aws_iam_role.bootstrap.name
 }
