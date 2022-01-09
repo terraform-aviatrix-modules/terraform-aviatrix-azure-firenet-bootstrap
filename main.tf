@@ -23,9 +23,17 @@ module "azure_checkpoint" {
 module "aws_fortigate" {
   count  = local.cloud == "aws" ? (local.firewall_vendor == "fortigate" ? 1 : 0) : 0
   source = "./modules/aws_fortigate"
+
+  hostname    = var.hostname
+  password    = var.password
+  internal_gw = var.internal_gw
 }
 
 module "azure_fortigate" {
   count  = local.cloud == "azure" ? (local.firewall_vendor == "fortigate" ? 1 : 0) : 0
   source = "./modules/azure_fortigate"
+
+  hostname    = var.hostname
+  password    = var.password
+  internal_gw = var.internal_gw
 }
