@@ -41,3 +41,6 @@ This module will return the following outputs:
 key | description
 :---|:---
 user_data | Generated user_data in case of Checkpoint or FortiGate firewall.
+
+For the Palo Alto instances, the default username and password are:
+AWS User account: admin/Aviatrix123# API Account: avxadmin/Aviatrix123#

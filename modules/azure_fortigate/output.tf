@@ -1,3 +1,3 @@
 output "user_data" {
-  value = "x"
+  value = data.template_file.fortigate.rendered
 }
