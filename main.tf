@@ -20,12 +20,12 @@ module "azure_checkpoint" {
   source = "./modules/azure_checkpoint"
 }
 
-module "aws_fortigate" {
-  count  = local.cloud == "aws" ? (local.firewall_vendor == "fortigate" ? 1 : 0) : 0
-  source = "./modules/aws_fortigate"
-}
+# module "aws_fortigate" {
+#   count  = local.cloud == "aws" ? (local.firewall_vendor == "fortigate" ? 1 : 0) : 0
+#   source = "./modules/aws_fortigate"
+# }
 
-module "azure_fortigate" {
-  count  = local.cloud == "azure" ? (local.firewall_vendor == "fortigate" ? 1 : 0) : 0
-  source = "./modules/azure_fortigate"
-}
+# module "azure_fortigate" {
+#   count  = local.cloud == "azure" ? (local.firewall_vendor == "fortigate" ? 1 : 0) : 0
+#   source = "./modules/azure_fortigate"
+# }
