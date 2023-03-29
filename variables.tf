@@ -38,6 +38,12 @@ variable "internal_gw" {
   default     = ""
 }
 
+variable "admintimeout" {
+  type        = number
+  description = "Timeout for admin web UI"
+  default     = 60
+}
+
 locals {
   firewall_vendor = lower(var.firewall_vendor)
 
