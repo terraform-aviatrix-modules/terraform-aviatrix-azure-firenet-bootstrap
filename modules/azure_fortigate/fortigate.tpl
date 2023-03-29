@@ -4,6 +4,7 @@ config system admin
 end
 config system global
     set hostname ${hostname}
+    set admintimeout ${admintimeout}
 end
 
 # Important HTTPS needs to be allowed on LAN interface for Firewall Health Check

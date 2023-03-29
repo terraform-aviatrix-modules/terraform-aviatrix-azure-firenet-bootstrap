@@ -1,39 +1,60 @@
-# terraform-aviatrix-mc-firenet-bootstrap
+# terraform-aviatrix-azure-firenet-bootstrap
 
 ### Description
-Module to easily create infrastructure to bootstrap Firenet NGFW instances
-
-### Diagram
-\<Provide a diagram of the high level constructs thet will be created by this module>
-<img src="<IMG URL>"  height="250">
+Module to easily create infrastructure to bootstrap Firenet NGFW instances in Azure.
 
 ### Compatibility
 Module version | Terraform version | Controller version | Terraform provider version
 :--- | :--- | :--- | :---
-v1.0.0 | 0.13-v1.x | >=6.4 | >=2.19.0
+v1.0.0 | >=v1.0 | >=6.4 | >=3.0.0
 
 ### Usage Example
 ```
 module "bootstrap_fw1" {
-  source  = "terraform-aviatrix-modules/mc-firenet-bootstrap/aviatrix"
+  source  = "terraform-aviatrix-modules/azurre-firenet-bootstrap/aviatrix"
   version = "1.0.0"
 
 
 }
 ```
 
-### Variables
+### FortiGate Variables
 The following variables are required:
 
 key | value
 :--- | :---
-\<keyname> | \<description of value that should be provided in this variable>
+firewall_vendor | Set to "Fortigate".
 
 The following variables are optional:
 
 key | default | value 
 :---|:---|:---
-\<keyname> | \<default value> | \<description of value that should be provided in this variable>
+password | Aviatrix#1234 | Password to log in to the Firewall
+
+### Palo Alto Variables
+The following variables are required:
+
+key | value
+:--- | :---
+firewall_vendor | Set to "Palo Alto".
+
+The following variables are optional:
+
+key | default | value 
+:---|:---|:---
+
+### Checkpoint Variables
+The following variables are required:
+
+key | value
+:--- | :---
+firewall_vendor | Set to "Checkpoint".
+
+The following variables are optional:
+
+key | default | value 
+:---|:---|:---
+password | Aviatrix#1234 | Password in case of Fortigate or Checkpoint firewall.
 
 ### Outputs
 This module will return the following outputs:

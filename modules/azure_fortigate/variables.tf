@@ -12,3 +12,9 @@ variable "internal_gw" {
   type        = string
   description = "IP of the VNET router (first IP), for configuring internal routing on the FortiGate"
 }
+
+variable "admintimeout" {
+  type        = number
+  description = "Timeout for admin web UI"
+  default     = 60
+}

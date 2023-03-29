@@ -21,6 +21,7 @@ resource "azurerm_storage_account" "bootstrap" {
 resource "azurerm_storage_share" "bootstrap" {
   name                 = "bootstrap-panw-${random_string.account.result}"
   storage_account_name = azurerm_storage_account.bootstrap.name
+  quota                = 1
 }
 
 resource "azurerm_storage_share_directory" "config" {
